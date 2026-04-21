@@ -1,0 +1,28 @@
+{% extends "en/base_en.html" %}
+
+{% block main_content %}
+<div class="container">
+    <h2>Our Products</h2>
+
+    {% if products %}
+        <div class="products-grid">
+            {% for product in products %}
+            <div class="product-card">
+                <div class="product-image">
+                    <!-- Placeholder for product image -->
+                    <div class="image-placeholder">Product Image</div>
+                </div>
+                <div class="product-info">
+                    <h3>{{ product.name_en }}</h3>
+                    <p class="price">${{ product.price }}</p>
+                    <p class="description">{{ product.description_en|truncate(100) }}</p>
+                    <a href="{{ url_for('public.product_detail', product_id=product.id, lang='en') }}" class="btn btn-primary">View Details</a>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+    {% else %}
+        <p>No products available at the moment.</p>
+    {% endif %}
+</div>
+{% endblock %}

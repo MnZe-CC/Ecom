@@ -1,0 +1,46 @@
+{% extends "admin/base_admin.html" %}
+
+{% block title %}Products - Admin Panel{% endblock %}
+
+{% block admin_content %}
+<div class="container">
+    <div class="page-header">
+        <h2>Products</h2>
+        <a href="{{ url_for('admin.edit_product') }}" class="btn btn-primary">Add New Product</a>
+    </div>
+
+    {% if products %}
+        <table class="data-table">
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Name</th>
+                    <th>Price</th>
+                    <th>Category</th>
+                    <th>Stock Status</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for product in products %}
+                <tr>
+                    <td>{{ product.id }}</td>
+                    <td>{{ product.name_en }}</td>
+                    <td>${{ product.price }}</td>
+                    <td>{{ product.category.name_en if product.category else 'None' }}</td>
+                    <td>{{ product.stock_status }}</td>
+                    <td>
+                        <a href="{{ url_for('admin.edit_product', product_id=product.id) }}" class="btn btn-small">Edit</a>
+                        <form method="POST" action="{{ url_for('admin.delete_product', product_id=product.id) }}" style="display:inline;">
+                            <button type="submit" class="btn btn-small btn-danger" onclick="return confirm('Are you sure?')">Delete</button>
+                        </form>
+                    </td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    {% else %}
+        <p>No products found. <a href="{{ url_for('admin.edit_product') }}">Add the first product</a>.</p>
+    {% endif %}
+</div>
+{% endblock %}

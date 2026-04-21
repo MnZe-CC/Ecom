@@ -1,0 +1,45 @@
+{% extends "admin/base_admin.html" %}
+
+{% block title %}Index Results - Admin Panel{% endblock %}
+
+{% block admin_content %}
+<div class="container">
+    <div class="page-header">
+        <h2>Ecommerce Index Results</h2>
+        <form method="POST" action="{{ url_for('admin.calculate_index_route') }}" style="display: inline;">
+            <button type="submit" class="btn btn-primary">Recalculate Index</button>
+        </form>
+    </div>
+
+    <div class="info-box">
+        <p>Results of Ecommerce Development Index calculations. These scores help measure product and overall business performance.</p>
+    </div>
+
+    {% if results %}
+        <table class="data-table">
+            <thead>
+                <tr>
+                    <th>Date</th>
+                    <th>Product</th>
+                    <th>Parameter</th>
+                    <th>Value</th>
+                    <th>Score</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for result, product, parameter in results %}
+                <tr>
+                    <td>{{ result.created_at.strftime('%Y-%m-%d') }}</td>
+                    <td>{{ product.name_en if product else 'Global' }}</td>
+                    <td>{{ parameter.name_en }}</td>
+                    <td>{{ result.value }}</td>
+                    <td>{{ result.calculated_score }}</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    {% else %}
+        <p>No index results found. <a href="{{ url_for('admin.calculate_index_route') }}">Calculate the first index</a>.</p>
+    {% endif %}
+</div>
+{% endblock %}

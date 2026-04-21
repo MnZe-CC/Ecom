@@ -1,0 +1,41 @@
+{% extends "admin/base_admin.html" %}
+
+{% block title %}Categories - Admin Panel{% endblock %}
+
+{% block admin_content %}
+<div class="container">
+    <div class="page-header">
+        <h2>Categories</h2>
+        <a href="{{ url_for('admin.edit_category') }}" class="btn btn-primary">Add New Category</a>
+    </div>
+
+    {% if categories %}
+        <table class="data-table">
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>English Name</th>
+                    <th>Arabic Name</th>
+                    <th>Products Count</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for category in categories %}
+                <tr>
+                    <td>{{ category.id }}</td>
+                    <td>{{ category.name_en }}</td>
+                    <td>{{ category.name_ar }}</td>
+                    <td>{{ category.products|length }}</td>
+                    <td>
+                        <a href="{{ url_for('admin.edit_category', category_id=category.id) }}" class="btn btn-small">Edit</a>
+                    </td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    {% else %}
+        <p>No categories found. <a href="{{ url_for('admin.edit_category') }}">Add the first category</a>.</p>
+    {% endif %}
+</div>
+{% endblock %}

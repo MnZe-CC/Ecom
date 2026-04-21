@@ -1,0 +1,45 @@
+{% extends "en/base_en.html" %}
+
+{% block title %}{{ product.name_en }} - Nidam IE Commerce{% endblock %}
+
+{% block main_content %}
+<div class="container">
+    <div class="product-detail">
+        <div class="product-images">
+            <!-- Placeholder for product images -->
+            <div class="image-placeholder">Product Image</div>
+        </div>
+
+        <div class="product-info">
+            <h2>{{ product.name_en }}</h2>
+            <p class="price">${{ product.price }}</p>
+
+            {% if product.stock_status == 'in_stock' %}
+                <span class="stock-status in-stock">In Stock</span>
+            {% elif product.stock_status == 'out_of_stock' %}
+                <span class="stock-status out-of-stock">Out of Stock</span>
+            {% else %}
+                <span class="stock-status limited">Limited Availability</span>
+            {% endif %}
+
+            <div class="description">
+                <h3>Description</h3>
+                <p>{{ product.description_en }}</p>
+            </div>
+
+            {% if attributes %}
+            <div class="attributes">
+                <h3>Attributes</h3>
+                <ul>
+                    {% for attr in attributes %}
+                    <li><strong>{{ attr.name_en }}:</strong> {{ attr.value_en }}</li>
+                    {% endfor %}
+                </ul>
+            </div>
+            {% endif %}
+
+            <button class="btn btn-primary">Add to Cart</button>
+        </div>
+    </div>
+</div>
+{% endblock %}

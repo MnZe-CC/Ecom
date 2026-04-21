@@ -1,0 +1,57 @@
+{% extends "admin/base_admin.html" %}
+
+{% block title %}{% if parameter %}Edit Index Parameter{% else %}Add New Index Parameter{% endif %} - Admin Panel{% endblock %}
+
+{% block admin_content %}
+<div class="container">
+    <h2>{% if parameter %}Edit Index Parameter{% else %}Add New Index Parameter{% endif %}</h2>
+
+    <div class="info-box">
+        <p>Define a parameter for the Ecommerce Development Index. Formulas can include variables like sales, views, conversion_rate, etc.</p>
+        <p>Example formulas:
+            <ul>
+                <li><code>sales * 0.1</code> - Points for each sale</li>
+                <li><code>views / 100</code> - Points for site traffic</li>
+                <li><code>conversion_rate * 100</code> - Points for conversion percentage</li>
+            </ul>
+        </p>
+    </div>
+
+    <form method="POST">
+        <div class="form-group">
+            <label for="name_en">English Name</label>
+            <input type="text" id="name_en" name="name_en" value="{{ parameter.name_en if parameter else '' }}" required>
+        </div>
+
+        <div class="form-group">
+            <label for="name_ar">Arabic Name</label>
+            <input type="text" id="name_ar" name="name_ar" value="{{ parameter.name_ar if parameter else '' }}" required>
+        </div>
+
+        <div class="form-group">
+            <label for="formula">Formula</label>
+            <input type="text" id="formula" name="formula" value="{{ parameter.formula if parameter else '' }}" placeholder="e.g., sales * 0.1" required>
+            <small>Mathematical expression to calculate this parameter</small>
+        </div>
+
+        <div class="form-group">
+            <label for="weight">Weight Factor</label>
+            <input type="number" id="weight" name="weight" step="0.1" min="0" max="1" value="{{ parameter.weight if parameter else '1.0' }}" required>
+            <small>Importance factor (0.0 to 1.0)</small>
+        </div>
+
+        <div class="form-group">
+            <label for="is_active">
+                <input type="checkbox" id="is_active" name="is_active" {% if parameter and parameter.is_active %}checked{% endif %}>
+                Active
+            </label>
+            <small>If unchecked, this parameter won't be used in calculations</small>
+        </div>
+
+        <div class="form-actions">
+            <button type="submit" class="btn btn-primary">{% if parameter %}Update Parameter{% else %}Add Parameter{% endif %}</button>
+            <a href="{{ url_for('admin.index_parameters') }}" class="btn btn-secondary">Cancel</a>
+        </div>
+    </form>
+</div>
+{% endblock %}

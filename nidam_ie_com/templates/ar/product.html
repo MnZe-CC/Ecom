@@ -1,0 +1,45 @@
+{% extends "ar/base_ar.html" %}
+
+{% block title %}{{ product.name_ar }} - نماد إيكомерس{% endblock %}
+
+{% block main_content %}
+<div class="container">
+    <div class="product-detail">
+        <div class="product-images">
+            <!-- Placeholder for product images -->
+            <div class="image-placeholder">صورة المنتج</div>
+        </div>
+
+        <div class="product-info">
+            <h2>{{ product.name_ar }}</h2>
+            <p class="price">{{ product.price }} ريال</p>
+
+            {% if product.stock_status == 'in_stock' %}
+                <span class="stock-status in-stock">متوفر</span>
+            {% elif product.stock_status == 'out_of_stock' %}
+                <span class="stock-status out-of-stock">غير متوفر</span>
+            {% else %}
+                <span class="stock-status limited">متوفر بكمية محدودة</span>
+            {% endif %}
+
+            <div class="description">
+                <h3>الوصف</h3>
+                <p>{{ product.description_ar }}</p>
+            </div>
+
+            {% if attributes %}
+            <div class="attributes">
+                <h3>الخصائص</h3>
+                <ul>
+                    {% for attr in attributes %}
+                    <li><strong>{{ attr.name_ar }}:</strong> {{ attr.value_ar }}</li>
+                    {% endfor %}
+                </ul>
+            </div>
+            {% endif %}
+
+            <button class="btn btn-primary">إضافة إلى السلة</button>
+        </div>
+    </div>
+</div>
+{% endblock %}

@@ -1,0 +1,49 @@
+{% extends "admin/base_admin.html" %}
+
+{% block title %}Index Parameters - Admin Panel{% endblock %}
+
+{% block admin_content %}
+<div class="container">
+    <div class="page-header">
+        <h2>Ecommerce Index Parameters</h2>
+        <a href="{{ url_for('admin.edit_index_parameter') }}" class="btn btn-primary">Add New Parameter</a>
+    </div>
+
+    <div class="info-box">
+        <p>Define parameters for the Ecommerce Development Index. You can set formulas and weights to calculate performance scores.</p>
+    </div>
+
+    {% if parameters %}
+        <table class="data-table">
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>English Name</th>
+                    <th>Arabic Name</th>
+                    <th>Formula</th>
+                    <th>Weight</th>
+                    <th>Active</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for parameter in parameters %}
+                <tr>
+                    <td>{{ parameter.id }}</td>
+                    <td>{{ parameter.name_en }}</td>
+                    <td>{{ parameter.name_ar }}</td>
+                    <td>{{ parameter.formula|truncate(30) }}</td>
+                    <td>{{ parameter.weight }}</td>
+                    <td>{{ 'Yes' if parameter.is_active else 'No' }}</td>
+                    <td>
+                        <a href="{{ url_for('admin.edit_index_parameter', param_id=parameter.id) }}" class="btn btn-small">Edit</a>
+                    </td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    {% else %}
+        <p>No index parameters found. <a href="{{ url_for('admin.edit_index_parameter') }}">Add the first parameter</a>.</p>
+    {% endif %}
+</div>
+{% endblock %}
