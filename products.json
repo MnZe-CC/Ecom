@@ -1,0 +1,69 @@
+{
+  "products": [
+    {
+      "id": 1,
+      "name": "Smartphone XYZ",
+      "price": 699.99,
+      "category": "Electronics",
+      "image": "/static/images/products/smartphone.png",
+      "description": "Latest smartphone with advanced features"
+    },
+    {
+      "id": 2,
+      "name": "Laptop Pro",
+      "price": 1299.99,
+      "category": "Electronics",
+      "image": "/static/images/products/laptop.png",
+      "description": "High-performance laptop for professionals"
+    },
+    {
+      "id": 3,
+      "name": "Wireless Headphones",
+      "price": 199.99,
+      "category": "Electronics",
+      "image": "/static/images/products/headphones.png",
+      "description": "Premium sound quality with noise cancellation"
+    },
+    {
+      "id": 4,
+      "name": "Men's T-Shirt",
+      "price": 29.99,
+      "category": "Clothing",
+      "image": "/static/images/products/tshirt.png",
+      "description": "Comfortable cotton t-shirt for everyday wear"
+    },
+    {
+      "id": 5,
+      "name": "Women's Dress",
+      "price": 49.99,
+      "category": "Clothing",
+      "image": "/static/images/products/dress.png",
+      "description": "Elegant dress for special occasions"
+    },
+    {
+      "id": 6,
+      "name": "Coffee Maker",
+      "price": 89.99,
+      "category": "Home & Kitchen",
+      "image": "/static/images/products/cookbook.png",
+      "description": "Automatic coffee maker with timer function"
+    }
+  ],
+  "categories": [
+    {
+      "id": 1,
+      "name": "Electronics",
+      "image": "/static/images/products/smartphone.png"
+    },
+    {
+      "id": 2,
+      "name": "Clothing",
+      "image": "/static/images/products/tshirt.png"
+    },
+    {
+      "id": 3,
+      "name": "Home & Kitchen",
+      "image": "/static/images/products/cookbook.png"
+    }
+  ]
+}
